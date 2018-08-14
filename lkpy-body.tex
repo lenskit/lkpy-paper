@@ -1,7 +1,5 @@
 \section{Introduction}
 
-LensKit is dead. Long live LensKit.
-
 LensKit \citep{Ekstrand2011-bp} is an open-source toolkit that provides a variety of features in support of research, education, and deployment of recommender systems.
 It provides tools and infrastructure support for managing data and algorithm configurations, implementations of several collaborative filtering algorithms, and an evaluation suite for conducting offline experiments.
 
@@ -220,12 +218,13 @@ It is somewhat verbose, but ever step of the evaluation process is clear in the 
 
 \subsection{Dependencies and Environment}
 
-LKPY leverages Pandas \citep{McKinney2010-gs}, numpy \citep{Oliphant2006-vd}, scipy \citep{Oliphant2007-ql}, and PyTables, along with several other Python modules.
-We use Cython \citep{Behnel2011-uz} for native-code acceleration, as it provides clean integrations with numpy and OpenMP with a minimum of boilerplate.
+LKPY leverages Pandas \citep{McKinney2010-gs}, numpy \citep{Oliphant2006-vd}, scipy \citep{Oliphant2007-ql}, and PyTables/HDF5, along with several other Python modules.
+We use Cython \citep{Behnel2011-uz} for native-code acceleration, as it integrates with numpy and OpenMP with a minimum of boilerplate.
 
-We regularly test LKPY with recent Python versions on Windows and Linux, and are adding  macOS to our testing and packaging September 2018.
+We regularly test LKPY with recent Python versions on Windows, Linux, and macOS.
+Our ongoing criteria are to support the three major operating systems, and the version of Python 3 available in the most most recent release of major Linux distributions (Ubuntu LTS, RHEL/CentOS with EPEL, and Debian).
 We focus primarily on Anaconda-based Python installations, but also test the code with vanilla Python on all supported platforms.
-We provide binaries both via Anaconda and the Python Package Index for supported Python versions and operating systems.\footnote{We are not yet able to provide vanilla Python binaries for Python 3.7 due to missing prepackaged binaries of one of our dependencies.}
+We provide binaries both via Anaconda and the Python Package Index for supported Python versions and operating systems.\footnote{We are not yet able to provide PyPI binaries for Python 3.7 due to missing prepackaged binaries of one of our dependencies.}
 
 \subsection{Future Directions}
 
