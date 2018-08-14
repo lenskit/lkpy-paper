@@ -1,0 +1,355 @@
+
+@INPROCEEDINGS{Ekstrand2011-bp,
+title = "Rethinking the Recommender Research Ecosystem: Reproducibility, Openness, and {LensKit}",
+booktitle = "Proceedings of the Fifth {ACM} Conference on Recommender Systems",
+author = "Ekstrand, Michael D and Ludwig, Michael and Konstan, Joseph A and Riedl, John T",
+abstract = "Recommender systems research is being slowed by the difficulty of replicating and comparing research results. Published research uses various experimental methodologies and metrics that are difficult to compare. It also often fails to sufficiently document the details of proposed algorithms or the evaluations employed. Researchers waste time reimplementing well-known algorithms, and the new implementations may miss key details from the original algorithm or its subsequent refinements. When proposing new algorithms, researchers should compare them against finely-tuned implementations of the leading prior algorithms using state-of-the-art evaluation methodologies. With few exceptions, published algorithmic improvements in our field should be accompanied by working code in a standard framework, including test harnesses to reproduce the described results. To that end, we present the design and freely distributable source code of LensKit, a flexible platform for reproducible recommender systems research. LensKit provides carefully tuned implementations of the leading collaborative filtering algorithms, APIs for common recommender system use cases, and an evaluation framework for performing reproducible offline evaluations of algorithms. We demonstrate the utility of LensKit by replicating and extending a set of prior comparative studies of recommender algorithms --- showing limitations in some of the original results --- and by investigating a question recently raised by a leader in the recommender systems community on problems with error-based prediction evaluation.",
+publisher = "ACM",
+pages = "133--140",
+series = "RecSys '11",
+year =  2011,
+url = "http://doi.acm.org/10.1145/2043932.2043958",
+conference = "RecSys '11",
+isbn = "9781450306836",
+doi = "10.1145/2043932.2043958"
+}
+
+
+@ARTICLE{Harper2015-cx,
+title = "The {MovieLens} Datasets: History and Context",
+author = "Harper, F Maxwell and Konstan, Joseph A",
+abstract = "The MovieLens datasets are widely used in education, research, and industry. They are downloaded hundreds of thousands of times each year, reflecting their use in popular press programming books, traditional and online courses, and software. These datasets are a product of member activity in the MovieLens movie recommendation system, an active research platform that has hosted many experiments since its launch in 1997. This article documents the history of MovieLens and the MovieLens datasets. We include a discussion of lessons learned from running a long-standing, live research platform from the perspective of a research organization. We document best practices and limitations of using the MovieLens datasets in new research.",
+journal = "ACM Transactions on Interactive Intelligent Systems",
+volume =  5,
+number =  4,
+pages = "19:1–19:19",
+month =  dec,
+year =  2015,
+url = "http://doi.acm.org/10.1145/2827872",
+issn = "2160-6455",
+doi = "10.1145/2827872"
+}
+
+
+@MISC{Kluver2014-kh,
+title = "{BookLens}",
+author = "Kluver, Daniel and Ludwig, Michael and Davies, Richard T. and Konstan, Joseph A. and Riedl, John T.",
+institution = "GroupLens Research, University of Minnesota",
+year =  2014,
+url = "https://booklens.umn.edu/"
+}
+
+
+@inproceedings{Zhang:2016:CCR:2818052.2874340,
+ author = {Zhang, Amy X. and Bhardwaj, Anant and Karger, David},
+ title = {Confer: A Conference Recommendation and Meetup Tool},
+ booktitle = {Proceedings of the 19th ACM Conference on Computer Supported Cooperative Work and Social Computing Companion},
+ series = {CSCW '16 Companion},
+ year = {2016},
+ isbn = {978-1-4503-3950-6},
+ location = {San Francisco, California, USA},
+ pages = {118--121},
+ numpages = {4},
+ url = {http://doi.acm.org/10.1145/2818052.2874340},
+ doi = {10.1145/2818052.2874340},
+ acmid = {2874340},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {collaborative filtering, conference planning, match-making, recommendation},
+}
+
+
+@INPROCEEDINGS{Carvalho2018-gi,
+title = "{FAiR}: A Framework for Analyses and Evaluations on Recommender Systems",
+booktitle = "Computational Science and Its Applications – {ICCSA} 2018",
+author = "Carvalho, Diego and Silva, Nícollas and Silveira, Thiago and Mourão, Fernando and Pereira, Adriano and Dias, Diego and Rocha, Leonardo",
+abstract = "Recommender systems (RSs) have become essential tools in e-commerce applications, helping users in the decision-making process. Evaluation on these tools is, however, a major divergence point nowadays, since there is no consensus regarding which metrics are necessary to consolidate new RSs. For this reason, distinct frameworks have been developed to ease the deployment of RSs in research and/or production environments. In the present work, we perform an extensive study of the most popular evaluation metrics, organizing them into three groups: Effectiveness-based, Complementary Dimensions of Quality and Domain Profiling. Further, we consolidate a framework named FAiR to help researchers in evaluating their RSs using these metrics, besides identifying the characteristics of data collections that may intrinsically affect RSs performance. FAiR is compatible with the output format of the main existing RSs libraries (i.e., MyMediaLite and LensKit).",
+publisher = "Springer International Publishing",
+pages = "383--397",
+year =  2018,
+url = "http://dx.doi.org/10.1007/978-3-319-95168-3_26",
+doi = "10.1007/978-3-319-95168-3\_26"
+}
+
+@INPROCEEDINGS{Ekstrand2018-ip,
+title = "All The Cool Kids, How Do They Fit In?: Popularity and Demographic Biases in Recommender Evaluation and Effectiveness",
+booktitle = "Proceedings of the Conference on Fairness, Accountability, and Transparency",
+author = "Ekstrand, Michael D and Tian, Mucun and Azpiazu, Ion Madrazo and Ekstrand, Jennifer D and Anuyah, Oghenemaro and McNeill, David and Pera, And Maria Soledad",
+volume =  81,
+pages = "172–186",
+series = "PMLR",
+month =  feb,
+year =  2018,
+url = "http://proceedings.mlr.press/v81/ekstrand18b.html",
+conference = "FAT*"
+}
+
+@INPROCEEDINGS{Ekstrand2017-zl,
+title = "Sturgeon and the Cool Kids: Problems with {Top-N} Recommender Evaluation",
+booktitle = "Proceedings of the 30th Florida Artificial Intelligence Research Society Conference",
+author = "Ekstrand, Michael D and Mahant, Vaibhav",
+abstract = "Top-N evaluation of recommender systems, typically carried out using metrics from information retrieval or machine learning, has several challenges. Two of these challenges are popularity bias, where the evaluation intrinsically favors algorithms that recommend popular items, and misclassified decoys, where items for which no user relevance is known are actually relevant to the user, but the evaluation is unaware and penalizes the recommender for suggesting them. One strategy for mitigating the misclassified decoy problem is the one-plus-random evaluation strategy and its generalization, which we call random decoys. In this work, we explore the random decoy strategy through both a theoretical treatment and an empirical study, but find little evidence to guide its tuning and show that it has complex and deleterious interactions with popularity bias.",
+publisher = "AAAI Press",
+month =  may,
+year =  2017,
+url = "https://aaai.org/ocs/index.php/FLAIRS/FLAIRS17/paper/viewPaper/15534"
+}
+
+@INPROCEEDINGS{Kluver2012-mf,
+title = "How many bits per rating?",
+booktitle = "Proceedings of the Sixth {ACM} Conference on Recommender Systems",
+author = "Kluver, Daniel and Nguyen, Tien T and Ekstrand, Michael and Sen, Shilad and Riedl, John",
+abstract = "Most recommender systems assume user ratings accurately represent user preferences. However, prior research shows that user ratings are imperfect and noisy. Moreover, this noise limits the measurable predictive power of any recommender system. We propose an information theoretic framework for quantifying the preference information contained in ratings and predictions. We computationally explore the properties of our model and apply our framework to estimate the efficiency of different rating scales for real world datasets. We then estimate how the amount of information predictions give to users is related to the scale ratings are collected on. Our findings suggest a tradeoff in rating scale granularity: while previous research indicates that coarse scales (such as thumbs up / thumbs down) take less time, we find that ratings with these scales provide less predictive value to users. We introduce a new measure, preference bits per second, to quantitatively reconcile this tradeoff.",
+publisher = "ACM",
+pages = "99–106",
+series = "RecSys '12",
+year =  2012,
+url = "http://doi.acm.org/10.1145/2365952.2365974",
+address = "New York, NY, USA",
+isbn = "9781450312707",
+doi = "10.1145/2365952.2365974"
+}
+
+@INPROCEEDINGS{Ekstrand2012-sk,
+title = "When recommenders fail: predicting recommender failure for algorithm selection and combination",
+booktitle = "Proceedings of the Sixth {ACM} Conference on Recommender Systems",
+author = "Ekstrand, Michael D and Riedl, John T",
+abstract = "Hybrid recommender systems --- systems using multiple algorithms together to improve recommendation quality --- have been well-known for many years and have shown good performance in recent demonstrations such as the NetFlix Prize. Modern hybridization techniques, such as feature-weighted linear stacking, take advantage of the hypothesis that the relative performance of recommenders varies by circumstance and attempt to optimize each item score to maximize the strengths of the component recommenders. Less attention, however, has been paid to understanding what these strengths and failure modes are. Understanding what causes particular recommenders to fail will facilitate better selection of the component recommenders for future hybrid systems and a better understanding of how individual recommender personalities can be harnessed to improve the recommender user experience. We present an analysis of the predictions made by several well-known recommender algorithms on the MovieLens 10M data set, showing that for many cases in which one algorithm fails, there is another that will correctly predict the rating.",
+publisher = "ACM",
+pages = "233–236",
+series = "RecSys '12",
+year =  2012,
+url = "http://doi.acm.org/10.1145/2365952.2366002",
+address = "New York, NY, USA",
+isbn = "9781450312707",
+doi = "10.1145/2365952.2366002"
+}
+
+@INPROCEEDINGS{Cao2015-jx,
+title = "Towards Making Systems Forget with Machine Unlearning",
+booktitle = "Proceedings of the 36th {IEEE} Symposium on Security and Privacy",
+author = "Cao, Yinzhi and Yang, Junfeng",
+abstract = "Today's systems produce a wealth of data every day, and the data further generates more data, i.e., the derived data, forming into a complex data propagation network, defined as the data's lineage. There are many reasons for users and administrators to forget certain data including the data's lineage. From the privacy perspective, a system may leak private information of certain users, and those users unhappy about privacy leaks naturally want to forget their data and its lineage. From the security perspective, an anomaly detection system can be polluted by adversaries through injecting manually crafted data into the training set. Therefore, we envision forgetting systems, capable of completely forgetting certain data and its lineage. In this paper, we focus on making learning systems forget, the process of which is defined as machine unlearning or unlearning. To perform unlearning upon learning system, we present general unlearning criteria, i.e., converting a learning system or part of it into a summation form of statistical query learning model, and updating all the summations to achieve unlearning. Then, we integrate our unlearning criteria into an unlearning architecture that interacts with all the components of a learning system, such as sample clustering and feature selection. To demonstrate our unlearning criteria and architecture, we select four real-world learning systems, including an item-item recommendation system, an online social network spam filter, and a malware detection system. These systems are first exposed to an adversarial environment, e.g., if the system is potentially vulnerable to training data pollution, we first pollute the training data set and show that the detection rate drops significantly. Then, we apply our unlearning technique upon those affected systems, either polluted or leaking private information. Our results show that after unlearning, the detection rate of a polluted system increases back to the one before pollution, and a system leaking a particular user's private information completely forgets that information.",
+publisher = "IEEE",
+month =  may,
+year =  2015,
+url = "http://www.ieee-security.org/TC/SP2015/papers-archived/6949a463.pdf"
+}
+
+
+@INPROCEEDINGS{Kluver2014-ha,
+title = "Evaluating Recommender Behavior for New Users",
+booktitle = "Proceedings of the Eighth {ACM} Conference on Recommender Systems ({RecSys} '14)",
+author = "Kluver, Daniel and Konstan, Joseph A",
+publisher = "ACM",
+month =  oct,
+year =  2014,
+url = "http://dx.doi.org/10.1145/2645710.2645742",
+doi = "10.1145/2645710.2645742"
+}
+
+@INPROCEEDINGS{Ekstrand2018-um,
+title = "Exploring Author Gender in Book Rating and Recommendation",
+booktitle = "Proceedings of the Twelfth {ACM} Conference on Recommender Systems",
+author = "Ekstrand, Michael D and Tian, Mucun and Imran Kazi, Mohammed R and Mehrpouyan, Hoda and Kluver, Daniel",
+publisher = "ACM",
+year =  2018,
+conference = "RecSys '18"
+}
+
+@ARTICLE{Pera2017-ip,
+title = "Recommending books to be exchanged online in the absence of wish lists",
+author = "Pera, Maria Soledad and Ng, Yiu-Kai",
+abstract = "An online exchange system is a web service that allows communities to trade items without the burden of manually selecting them, which saves users' time and effort. Even though online book-exchange systems have been developed, their services can further be improved by reducing the workload imposed on their users. To accomplish this task, we propose a recommendation-based book exchange system, called EasyEx, which identifies potential exchanges for a user solely based on a list of items the user is willing to part with. EasyEx is a novel and unique book-exchange system because unlike existing online exchange systems, it does not require a user to create and maintain a wish list, which is a list of items the user would like to receive as part of the exchange. Instead, EasyEx directly suggests items to users to increase serendipity and as a result expose them to items which may be unfamiliar, but appealing, to them. In identifying books to be exchanged, EasyEx employs known recommendation strategies, that is, personalized mean and matrix factorization, to predict book ratings, which are treated as the degrees of appeal to a user on recommended books. Furthermore, EasyEx incorporates OptaPlanner, which solves constraint satisfaction problems efficiently, as part of the recommendation-based exchange process to create exchange cycles. Experimental results have verified that EasyEx offers users recommended books that satisfy the users' interests and contributes to the item-exchange mechanism with a new design methodology.",
+journal = "Journal of the Association for Information Science and Technology",
+month =  nov,
+year =  2017,
+url = "http://dx.doi.org/10.1002/asi.23978",
+issn = "2330-1643",
+doi = "10.1002/asi.23978"
+}
+
+@ARTICLE{Pessemier2016-sp,
+title = "Hybrid group recommendations for a travel service",
+author = "Pessemier, Toon De and Dhondt, Jeroen and Martens, Luc",
+abstract = "Recommendation techniques have proven their usefulness as a tool to cope with the information overload problem in many classical domains such as movies, books, and music. Additional challenges for recommender systems emerge in the domain of tourism such as acquiring metadata and feedback, the sparsity of the rating matrix, user constraints, and the fact that traveling is often a group activity. This paper proposes a recommender system that offers personalized recommendations for travel destinations to individuals and groups. These recommendations are based on the users' rating profile, personal interests, and specific demands for their next destination. The recommendation algorithm is a hybrid approach combining a content-based, collaborative filtering, and knowledge-based solution. For groups of users, such as families or friends, individual recommendations are aggregated into group recommendations, with an additional opportunity for users to give feedback on these group recommendations. A group of test users evaluated the recommender system using a prototype web application. The results prove the usefulness of individual and group recommendations and show that users prefer the hybrid algorithm over each individual technique. This paper demonstrates the added value of various recommendation algorithms in terms of different quality aspects, compared to an unpersonalized list of the most-popular destinations.",
+journal = "Multimedia tools and applications",
+volume =  75,
+number =  5,
+pages = "1--25",
+month =  jan,
+year =  2016,
+url = "http://link.springer.com/article/10.1007/s11042-016-3265-x",
+language = "en",
+issn = "1380-7501, 1573-7721",
+doi = "10.1007/s11042-016-3265-x"
+}
+
+@MASTERSTHESIS{Solvang2017-zz,
+title = "Video Recommendation Systems: Finding a Suitable Recommendation Approach for an Application Without Sufficient Data",
+author = "Solvang, Marius Lørstad",
+year =  2017,
+url = "http://hdl.handle.net/10852/59239"
+}
+
+
+@ARTICLE{Konstan2015-mr,
+title = "Teaching Recommender Systems at Large Scale: Evaluation and Lessons Learned from a Hybrid {MOOC}",
+author = "Konstan, Joseph A and Walker, J D and Brooks, D Christopher and Brown, Keith and Ekstrand, Michael D",
+abstract = "In the fall of 2013, we offered an open online Introduction to Recommender Systems through Coursera, while simultaneously offering a for-credit version of the course on-campus using the Coursera platform and a flipped classroom instruction model. As the goal of offering this course was to experiment with this type of instruction, we performed extensive evaluation including surveys of demographics, self-assessed skills, and learning intent; we also designed a knowledge-assessment tool specifically for the subject matter in this course, administering it before and after the course to measure learning, and again 5 months later to measure retention. We also tracked students through the course, including separating out students enrolled for credit from those enrolled only for the free, open course. Students had significant knowledge gains across all levels of prior knowledge and across all demographic categories. The main predictor of knowledge gain was effort expended in the course. Students also had significant knowledge retention after the course. Both of these results are limited to the sample of students who chose to complete our knowledge tests. Student completion of the course was hard to predict, with few factors contributing predictive power; the main predictor of completion was intent to complete. Students who chose a concepts-only track with hand exercises achieved the same level of knowledge of recommender systems concepts as those who chose a programming track and its added assignments, though the programming students gained additional programming knowledge. Based on the limited data we were able to gather, face-to-face students performed as well as the online-only students or better; they preferred this format to traditional lecture for reasons ranging from pure convenience to the desire to watch videos at a different pace (slower for English language learners; faster for some native English speakers). This article also includes our qualitative observations, lessons learned, and future directions.",
+journal = "ACM Transactions on Computer-Human Interaction",
+volume =  22,
+number =  2,
+pages = "10:1–10:23",
+month =  apr,
+year =  2015,
+url = "http://doi.acm.org/10.1145/2728171",
+issn = "1073-0516",
+doi = "10.1145/2728171"
+}
+
+@ARTICLE{Konstan2015-mr,
+title = "Teaching Recommender Systems at Large Scale: Evaluation and Lessons Learned from a Hybrid {MOOC}",
+author = "Konstan, Joseph A and Walker, J D and Brooks, D Christopher and Brown, Keith and Ekstrand, Michael D",
+abstract = "In the fall of 2013, we offered an open online Introduction to Recommender Systems through Coursera, while simultaneously offering a for-credit version of the course on-campus using the Coursera platform and a flipped classroom instruction model. As the goal of offering this course was to experiment with this type of instruction, we performed extensive evaluation including surveys of demographics, self-assessed skills, and learning intent; we also designed a knowledge-assessment tool specifically for the subject matter in this course, administering it before and after the course to measure learning, and again 5 months later to measure retention. We also tracked students through the course, including separating out students enrolled for credit from those enrolled only for the free, open course. Students had significant knowledge gains across all levels of prior knowledge and across all demographic categories. The main predictor of knowledge gain was effort expended in the course. Students also had significant knowledge retention after the course. Both of these results are limited to the sample of students who chose to complete our knowledge tests. Student completion of the course was hard to predict, with few factors contributing predictive power; the main predictor of completion was intent to complete. Students who chose a concepts-only track with hand exercises achieved the same level of knowledge of recommender systems concepts as those who chose a programming track and its added assignments, though the programming students gained additional programming knowledge. Based on the limited data we were able to gather, face-to-face students performed as well as the online-only students or better; they preferred this format to traditional lecture for reasons ranging from pure convenience to the desire to watch videos at a different pace (slower for English language learners; faster for some native English speakers). This article also includes our qualitative observations, lessons learned, and future directions.",
+journal = "ACM Transactions on Computer-Human Interaction",
+volume =  22,
+number =  2,
+pages = "10:1–10:23",
+month =  apr,
+year =  2015,
+url = "http://doi.acm.org/10.1145/2728171",
+issn = "1073-0516",
+doi = "10.1145/2728171"
+}
+
+@MISC{Ekstrand2016-vr,
+title = "Testing Recommenders",
+booktitle = "A Practical Guide to Building Recommender Systems",
+author = "Ekstrand, Michael",
+abstract = "Why Test? When I met fellow GroupLens alum Sean McNee, he had a bit of advice for me: Write tests for your code. It took me some time to grasp the wisdom of this — after all, isn't it just re…",
+month =  feb,
+year =  2016,
+url = "https://buildingrecommenders.wordpress.com/2016/02/04/testing-recommenders/",
+note = "Accessed: 2017-1-6"
+}
+
+@INPROCEEDINGS{Gantner2011-ky,
+title = "{MyMediaLite}: A Free Recommender System Library",
+booktitle = "Proceedings of the Fifth {ACM} Conference on Recommender Systems",
+author = "Gantner, Zeno and Rendle, Steffen and Freudenthaler, Christoph and Schmidt-Thieme, Lars",
+abstract = "MyMediaLite is a fast and scalable, multi-purpose library of recommender system algorithms, aimed both at recommender system researchers and practitioners. It addresses two common scenarios in collaborative filtering: rating prediction (e.g. on a scale of 1 to 5 stars) and item prediction from positive-only implicit feedback (e.g. from clicks or purchase actions). The library offers state-of-the-art algorithms for those two tasks. Programs that expose most of the library's functionality, plus a GUI demo, are included in the package. Efficient data structures and a common API are used by the implemented algorithms, and may be used to implement further algorithms. The API also contains methods for real-time updates and loading/storing of already trained recommender models. MyMediaLite is free/open source software, distributed under the terms of the GNU General Public License (GPL). Its methods have been used in four different industrial field trials of the MyMedia project, including one trial involving over 50,000 households.",
+publisher = "ACM",
+pages = "305–308",
+series = "RecSys '11",
+year =  2011,
+url = "http://doi.acm.org/10.1145/2043932.2043989",
+address = "New York, NY, USA",
+isbn = "9781450306836",
+doi = "10.1145/2043932.2043989"
+}
+
+@ARTICLE{Ekstrand2016-dl,
+title = "Dependency Injection with Static Analysis and {Context-Aware} Policy",
+author = "Ekstrand, Michael D and Ludwig, Michael",
+journal = "Journal of Object Technology",
+volume =  15,
+number =  1,
+pages = "1:1",
+month =  feb,
+year =  2016,
+url = "http://www.jot.fm/contents/issue_2016_01/article1.html",
+language = "en",
+issn = "1660-1769",
+doi = "10.5381/jot.2016.15.5.a1"
+}
+
+@ARTICLE{Bottou2013-mn,
+title = "Counterfactual reasoning and learning systems: The example of computational advertising",
+author = "Bottou, Léon and Peters, Jonas and Quiñonero-Candela, Joaquin and Charles, Denis X and Chickering, D Max and Portugaly, Elon and Ray, Dipankar and Simard, Patrice and Snelson, Ed",
+abstract = "Abstract This work shows how to leverage causal inference to understand the behavior of complex learning systems interacting with their environment and predict the consequences of changes to the system. Such predictions allow both humans and algorithms to select the changes that would have improved the system performance. This work is illustrated by experiments on the ad placement system associated with the Bing search engine.",
+journal = "Journal of machine learning research: JMLR",
+publisher = "JMLR. org",
+volume =  14,
+number =  1,
+pages = "3207--3260",
+year =  2013,
+url = "http://www.jmlr.org/papers/volume14/bottou13a/bottou13a.pdf",
+issn = "1532-4435"
+}
+
+
+@BOOK{Oliphant2006-vd,
+title = "A Guide to {NumPy}",
+author = "Oliphant, Travis E",
+publisher = "Trelgol Publishing",
+year =  2006
+}
+
+@ARTICLE{Oliphant2007-ql,
+title = "Python for Scientific Computing",
+author = "Oliphant, T E",
+abstract = "Python is an excellent ``steering'' language for scientific codes written in other languages. However, with additional basic tools, Python transforms into a high-level language suited for scientific and engineering code that's often fast enough to be immediately useful but also flexible enough to be sped up with additional extensions.",
+journal = "Computing in Science Engineering",
+volume =  9,
+number =  3,
+pages = "10--20",
+month =  may,
+year =  2007,
+url = "http://dx.doi.org/10.1109/MCSE.2007.58",
+keywords = "high level languages;Python;high-level language;scientific codes;scientific computing;steering language;Application software;Embedded software;High level languages;Internet;Libraries;Prototypes;Scientific computing;Software standards;Standards development;Writing;Python;computer languages;scientific computing;scientific programming",
+issn = "1521-9615",
+doi = "10.1109/MCSE.2007.58"
+}
+
+@INPROCEEDINGS{McKinney2010-gs,
+title = "Data Structures for Statistical Computing in Python",
+booktitle = "Proceedings of the 9th Python in Science Conference",
+author = "McKinney, Wes and {Others}",
+volume =  445,
+pages = "51--56",
+institution = "Austin, TX",
+year =  2010,
+url = "http://conference.scipy.org/proceedings/scipy2010/pdfs/mckinney.pdf"
+}
+
+
+@ARTICLE{Behnel2011-uz,
+title = "Cython: The Best of Both Worlds",
+author = "Behnel, S and Bradshaw, R and Citro, C and Dalcin, L and Seljebotn, D S and Smith, K",
+abstract = "Cython is a Python language extension that allows explicit type declarations and is compiled directly to C. As such, it addresses Python's large overhead for numerical loops and the difficulty of efficiently using existing C and Fortran code, which Cython can interact with natively.",
+journal = "Computing in Science Engineering",
+volume =  13,
+number =  2,
+pages = "31--39",
+month =  mar,
+year =  2011,
+url = "http://dx.doi.org/10.1109/MCSE.2010.118",
+keywords = "C language;numerical analysis;Cython language;Fortran code;Python language extension;numerical loops;programming language;Cython;Python;numerics;scientific computing",
+issn = "1521-9615",
+doi = "10.1109/MCSE.2010.118"
+}
+
+
+@BOOK{McKinney2018-pv,
+title = "Python for Data Analysis: Data Wrangling with pandas, {NumPy}, and {IPython}",
+author = "McKinney, Wes",
+publisher = "O'Reilly",
+year =  2018,
+url = "http://shop.oreilly.com/product/0636920023784.do",
+isbn = "9781491957660"
+}
+@Misc{Surprise,
+author =   {Hug, Nicolas},
+title =    { {S}urprise, a {P}ython library for recommender systems},
+howpublished = {\url{http://surpriselib.com}},
+year = {2017}
+}
+@ARTICLE{Sepulveda2017-ma,
+title = "{pyRecLab}: A Software Library for Quick Prototyping of Recommender Systems",
+author = "Sepulveda, Gabriel and Parra, Denis",
+abstract = "Abstract: This paper introduces pyRecLab , a software library written in C++ with Python bindings which allows to quickly train, test and develop recommender systems. Although there are several software libraries for this purpose, only a few let developers to get quickly",
+journal = "arXiv preprint arXiv:1706. 06291",
+year =  2017,
+url = "https://arxiv.org/abs/1706.06291"
+}

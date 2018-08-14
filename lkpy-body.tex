@@ -1,0 +1,261 @@
+\section{Introduction}
+
+LensKit is dead. Long live LensKit.
+
+LensKit \citep{Ekstrand2011-bp} is an open-source toolkit that provides a variety of features in support of research, education, and deployment of recommender systems.
+It provides tools and infrastructure support for managing data and algorithm configurations, implementations of several collaborative filtering algorithms, and an evaluation suite for conducting offline experiments.
+
+Based on our experience researching and teaching with LensKit, and the experience reports we hear directly and indirectly from others, we have come to believe that LensKit's current design and technology choices are not a good match for the current and future needs of the recommender systems research community.
+Further, in our examination of the software landscape to determine what existing tools might support the kinds of offline evaluation experiments we have been running with LensKit and plan to run in coming years, we came to the conclusion that there is a need for high-quality, well-tested support code for recommender systems experiments in the PyData environment.
+
+To meet that need, we are developing LKPY, a ``spiritual successor'' to LensKit written in Python.
+This project brings the LensKit's focus on reproducible research supported by well-tested code to a more widely-used and easier-to-learn computational environment.
+
+In this paper, we reflect on some of the successes and failures of the LensKit project and present the goals and design of the LKPY software.
+We invite the community to provide feedback on how this software does or does not meet their needs.
+
+\section{LensKit in Use}
+
+In its 8 years of development, we and others have successfully used LensKit across all its intended application contexts.
+
+\subsection{Research}
+LensKit has supported a good number of research projects spanning a range of research questions and methodologies; a complete list of known published papers, theses, and dissertations using LensKit is available from the project web site\footnote{\url{http://lenskit.org/research}}.
+
+We have used LensKit ourselves both for offline evaluations exploring various aspects of algorithm and user behavior \citep{Ekstrand2012-sk, Ekstrand2018-ip, Kluver2012-mf} and studying the evaluation process itself \citep{Ekstrand2017-zl}.
+It has also been used to study specialized recommendation problems, including cold start \citep{Kluver2014-ha} and reversible machine learning \citep{Cao2015-jx}.
+Its algorithms have been used to recommend books \citep{Pera2017-ip}, tourist destinations \citep{Pessemier2016-sp}, videos \citep{Solvang2017-zz}, and a number of other item types.
+
+One of LensKit's primary objectives is to promote reproducible, reliable research.
+To that end we have been modestly successful; in our own work, it has enabled us to publish complete reproducer code for recent papers \citep{Ekstrand2017-zl, Ekstrand2018-ip}, and most recently to provide reproducer code during the review process \citep{Ekstrand2018-um}.
+
+\subsection{Education}
+
+We have used LensKit to support recommender systems education in multiple settings.
+At the University of Minnesota, Boise State University, and Texas State University, we and our collaborators have used it as the basis for assignments in graduate classes on recommender systems.
+It also forms the basis for the assignments in the \emph{Recommender Systems} MOOC \citep{Konstan2015-mr}.
+
+Response to the software in this setting has been mixed.
+Its standardized APIs and integration with the Java ecosystem have made things such as automated grading in the MOOC environment relatively easy to implement, but students have complained about needing to work in Java and about the system's complexity.
+
+\subsection{Production}
+
+LensKit powers the MovieLens movie recommender system \citep{Harper2015-cx}, the BookLens book recommender \citep{Kluver2014-kh}, and the Confer conference session recommender \citep{Zhang:2016:CCR:2818052.2874340}.
+This work, particularly in MovieLens, has enabled new user-centered research on recommender system capabilities and user response.
+
+\section{Reflections on LensKit}
+
+\subsection{What We Got Right}
+
+There are several things that we think we did well in the original LensKit software; some of these we carry forward into LKPY, while others were good ideas in LensKit's contexts but are not as important today.
+
+\subsubsection{Testing}
+In the LensKit development process, we have a strong focus on code testing \citep{Ekstrand2016-vr}. This has served us well, and helped ensure the reliability of the LensKit code.
+It is by no means perfect, and there have been bugs that slipped through, but the effort we spent on testing was a wise investment.
+
+\subsubsection{The Java Platform}
+When we began work on LensKit, there were three possible platforms we seriously considered: Java, Python, and C++.
+At that time, the Python data science ecosystem was not what it is today; NumPy and SciPy existed, but Pandas did not.
+Pure Python does not have the performance needed for efficient recommender experiments.
+Java enabled us to achieve strong computational performance in a widely-taught programming language with well-established standard practices, making it significantly easier for new users (particularly students) to adapt and contribute to it than we likely would have seen with a corresponding C++ code base.
+
+\subsubsection{Modular Algorithms}
+LensKit was built around the idea of modular algorithms where individual components can be replaced and reconfigured.
+In the item-item collaborative filter, for example, users can change the similarity function, the neighborhood weighting function, input rating vector normalizations, item neighborhood normalizations, and the strategy for mapping input data to rating vectors.
+This configurability has been useful for exploring a range of configuration options for algorithms, at the expense of larger hyperparameter search spaces.
+
+\subsection{What Doesn't Work}
+
+\subsubsection{Opinionated Evaluation}
+While LensKit's algorithms were highly configurable, its offline evaluation tools are much more opinionated.
+You can specify a few types of data splitting strategies, and recommendation candidate strategies, and it has a range of evaluation metrics, but the overall evaluation process and methods for aggregating metric results are fixed.
+Metrics are also limited in their interface.
+
+As we expanded our research into the recommender evaluation process itself, we repeatedly ran in to limits of this evaluation strategy and had to write new evaluation code in a fairly heavy framework, or just have the evaluator dump intermediate files that we would reprocess in R or Python, in order to carry out our research.
+Too often the answer we would have to give to questions on the mailing list or StackOverflow is ``we're sorry, LesnKit can't do that yet''.
+
+One of our goals was to make it difficult to do an evaluation wrong: we wanted the defaults to embody best practices for offline evaluation.
+However, best practices have been sufficiently unknown and fast-moving that we now believe this approach has held our research back more than it has helped the field.
+It is particularly apparent that a different approach is necessary to support next-generation offline evaluation strategies, such as counterfactual evaluation \citep{Bottou2013-mn}, and carry out the evaluation research needed to advance our understanding of effective, robust, and externally valid offline evaluations.
+
+\subsubsection{Indirect Configuration}
+
+LensKit is built on the dependency injection principle, using a dependency injection container \citep{Ekstrand2016-dl} to instantiate and connect recommender components.
+This method gave us quite a few useful capabilities, such as the automatically detecting components that could be shared between multiple experiment runs in a parameter tuning experiment, but resulted in a system where it is difficult to configure an algorithm, and difficult to understand an algorithm's configuration.
+It was also difficult to document how to use the system.
+
+We believe this largely stems from the role of inversion of control in working with LensKit code --- users never write code that assembles a LensKit algorithm, they simply ask LensKit to instantiate one and LensKit calls their custom components.
+
+\subsubsection{Implicit Features}
+Beyond indirect configuration, LensKit has a lot of implicit behavior in its algorithms and evaluator.
+This has at least two downsides: first, it is less clear from reading a configuration precisely what LensKit will do, making it more difficult to review code and experiment scripts; second, if documentation slipped behind the code, understanding the behavior of LensKit experiment scripts required reading the LensKit source code itself.
+
+\subsubsection{Living in an Island}
+LensKit has its own data structures and data access paradigms.
+Part of this is due to lack of standardized, high-quality scientific data tooling that is not connected to a larger framework such as Spark (while Spark does seem to expose data structures as a separate library, documentation is nonexistent).
+
+This makes it difficult, however, to make LensKit interoperate with other software and data sets. While LensKit is flexible in the data it accepts, users must write data adapters.
+Using other tools such as Spark is difficult.
+It's unclear what, given the Java commitment, we could have done differently here, but it is definitely a liability for the future of recommender systems research.
+
+\section{Toolkit Desiderata}
+To address these weaknesses and power the next generation of recommender systems research, both in our own research group and elsewhere, there are several things that we desire from our recommender systems research software:
+
+\begin{description}
+\item[Build on Standard Tools]
+There are now standard tools, such as Pandas and the surrounding PyData ecosystem \citep{McKinney2018-pv}, that are widely adopted for data science and machine learning research.
+Building on these packages maximizes interoperability with other software packages and enables code reuse across different types of research.
+We also find Jupyter notebooks to be a valuable means of promoting reproducibility, and would like an experiment workflow where the final analysis consists of loading the recommender results into a Jupyter notebook and computing desired metrics over them.
+Small experiments could even be driven entirely from Jupyter.
+
+\item[Leverage Existing Software]
+Modern recommender systems are usually machine learning systems; a recommender research toolkit should not try to reinvent that wheel.
+Scikit-Learn provides many machine learning algorithms suitable for recommender systems research, and Keras, PyTorch, and TensorFlow all provide neural network functionality to Python.
+Recommender research tooling should work seamlessly with algorithms implemented in these kinds of toolkits.
+
+\item[Expose the Data Pipeline]
+LensKit hides the data pipeline: it controls data splitting, algorithm training, recommendation, and evaluation.
+Outputs of each stage can be examined, but not manipulated, and the pipeline itself cannot be easily changed.
+Putting the user in control of the pipeline, and providing functions to implement standard versions of each of its stages, will have two benefits: the actual pipeline used is clearly documented in the experiment code, and the pipeline can be modified as research needs demand.
+
+\item[Explicit is Better than Implicit]
+Related to exposing the data pipeline, we wish for our new tools to follow the Python philosophy of favoring explicit denotations of desired operation.
+This will make it easier to review experiment designs and improve the reliability and rigor of reproducible research.
+
+We hope that this will also make the LKPY code itself easier to read and understand.
+
+\item[Simple Interfaces]
+Interfaces to individual software components should be as simple as possible, so that it is easy to document, test, and reimplement them.
+
+\item[Easy-to-Use Development Environment]
+In order for prospective users and contributors, particularly students, to use LKPY and participate in its development, we want the development tools to be as standard and easy-to-use as possible.
+\end{description}
+
+Notably absent from this list is LensKit's (in)famous algorithm configurability.
+That configurability was useful for exploring the space of algorithm configurations, but its particular design is more suitable to heuristic techniques such as k-NN; machine learning approaches seem better served by a different design.
+Connecting with existing flexible optimization software will provide a great deal of configurability for new algorithms.
+We think it is more important for the recommender-specific software to focus on flexibility in the experiment design.
+
+\section{The LKPY Software Package}
+
+To that end, we are developing a successor to LensKit, LKPY.
+LKPY is a new Python package for recommender systems experiments, particularly offline evaluations and similar studies, that we hope will also be useful in educational settings.
+The first version of LKPY is now available\footnote{\url{https://lkpy.lenskit.org}}, and is capable of running many of the kinds of experiments we have run with LensKit in a more flexible and forward-looking fashion.
+
+LKPY is available under the MIT license.
+
+\subsection{LKPY Facilities}
+LKPY provides several modules for aiding recommender experiments:
+
+\begin{description}
+\item[Data Preparation]
+The \texttt{crossfold} module provides functions for splitting data for cross-validation.
+It supports rating-based, user-based, and item-based splitting strategies, with configurable data holdout settings.
+
+\item[Algorithm APIs]
+The \texttt{algorithms} module defines Python interfaces for training models, generating predictions, and generating recommendations.
+These interfaces are minimal, defined in terms of Pandas data structures, and can be readily implemented on top of any desired machine learning toolkit such as Scikit-Learn or Pandas.
+
+\item[Evaluation Metrics]
+The \texttt{metrics} package provides classical top-N and prediction accuracy metrics.
+Metrics are functions that operate directly over Pandas series objects, and thus can be applied to any data of an appropriate shape.
+There is therefore no limit to how the user reprocesses recommendations and predictions before computing metrics.
+
+\item[Classical CF Algorithms]
+LKPY provides implementations of nonpersonalized, $k$-NN, and biased matrix factorization collaborative filters.
+We expect to expand the set of algorithms provided, but being a source of algorithms is not LKPY's primary objective.
+These algorithms are provided in part to give LensKit users a migration path to LKPY that keeps the algorithms as consistent as possible; LKPY's algorithm implementations are based on LensKit's and should generally be the same.
+They are less configurable, however, selecting configuration options such as item-item similarity functions that we have found to work well across a range of data sets.
+We use Cython to accelerate inner algorithm computations when built-in Scipy/Numpy/Pandas operations are inadequate.
+
+\item[Batch Utilities]
+To ease writing evaluation scripts, LKPY provides utility functions for computing predictions or recommendations for many users in batch.
+\end{description}
+
+Since components connect with standard Pandas data structures, they can be used together or individually.
+It is trivial to use alternative algorithms with LKPY's data splitting and metrics, or to use an entirely different data preparation strategy with LensKit's algorithms and batch functions.
+
+One way in which our desire to favor explicit code over implicit behavior is in data processing: instead of telling LensKit how to transform data, in LKPY, the user just directly writes their data transformations using standard Pandas operations.
+
+\subsection{LKPY Example Code}
+
+\begin{figure}[tb]
+\begin{minted}{python}
+import pandas as pd
+from lenskit import batch, topn
+from lenskit import crossfold as xf
+from lenskit.algorithms import knn
+
+ratings = pd.read_csv('ml-100k/u.data', sep='\t',
+        names=['user', 'item', 'rating', 'timestamp'])
+
+algo = knn.ItemItem(30)
+
+def eval(train, test):
+    model = algo.train(train)
+    users = test.user.unique()
+    recs = batch.recommend(algo, model, users, 100,
+            topn.UnratedCandidates(train))
+    # combine with test ratings for relevance data
+    res = pd.merge(recs, test, how='left',
+                   on=('user', 'item'))
+    # fill in missing 0s
+    res.loc[res.rating.isna(), 'rating'] = 0
+    return res
+
+# compute evaluation
+splits = xf.partition_users(ratings, 5,
+        xf.SampleFrac(0.2)
+recs = pd.concat((eval(train, test)
+                  for (train, test) in splits))
+
+# compile results
+ndcg = recs.groupby('user').rating.apply(topn.ndcg)
+\end{minted}
+\caption{Example Simple Evaluation}
+\label{fig:example}
+\end{figure}
+
+Figure \ref{fig:example} shows an example of using LKPY to compute the nDCG of a k-NN algorithm with 5-fold cross-validation on the MovieLens 100K data set.
+It is somewhat verbose, but ever step of the evaluation process is clear in the code, so the experiment structure can be checked and it is self-documenting when the evaluation code is published.
+
+\subsection{Dependencies and Environment}
+
+LKPY leverages Pandas \citep{McKinney2010-gs}, numpy \citep{Oliphant2006-vd}, scipy \citep{Oliphant2007-ql}, and PyTables, along with several other Python modules.
+We use Cython \citep{Behnel2011-uz} for native-code acceleration, as it provides clean integrations with numpy and OpenMP with a minimum of boilerplate.
+
+We regularly test LKPY with recent Python versions on Windows and Linux, and are adding  macOS to our testing and packaging September 2018.
+We focus primarily on Anaconda-based Python installations, but also test the code with vanilla Python on all supported platforms.
+We provide binaries both via Anaconda and the Python Package Index for supported Python versions and operating systems.\footnote{We are not yet able to provide vanilla Python binaries for Python 3.7 due to missing prepackaged binaries of one of our dependencies.}
+
+\subsection{Future Directions}
+
+We intend to fill out some more algorithms in LKPY's capabilities, such as out-of-the-box integrations for SLIM, BPR, and Poisson factorization, and add facilities for alternative algorithm evaluation strategies.
+We also plan to build bridges to enable the algorithm implementations provided by other packages such as surprise \citep{Surprise} and PyRecLab \citep{Sepulveda2017-ma}.
+LKPY provides a clean, minimal core that can be extended however our needs and those of the research community require.
+
+\section{Comparison to Existing Packages}
+
+Before embarking on this project, we re-examined the landscape of existing software to determine if the needs we saw would be met by one of the other software packages.
+We were unable to find existing tooling that supports our goals of flexible recommender systems experiments that leverage the PyData ecosystem.
+
+Two of the most obvious contenders for current Python recommender systems are surprise \citep{Surprise} and PyRecLab \citep{Sepulveda2017-ma}.
+While Surprise uses numpy and scipy, neither of these packages leverage the PyData ecosystem; instead, each has its own classes for representing data sets.
+PyRecLab's evaluation facilities are also more automatic; we want to write out the evaluation steps in our own code so that we can experiment with them more readily.
+Further, we do not want to require students to learn C++ to be able to particpate in research that requires extending LKPY.
+
+Our approach is perhaps most similar to that of mrec\footnote{\url{https://github.com/Mendeley/mrec}}, in that we focus on discrete steps enabled by separate tools.
+Again, though, mrec does not leverage contemporary Python data science tools, and does not seem to be under active maintenance.
+We also focus on Python as the scripting language for experiment control instead of mrec's command-line orientation.
+
+It is our sense that many Python-based recommender systems research projects roll their own evaluation procedure directly in Python tools while building the recommender in scikit-learn or one of the deep learning frameworks.
+It is our goal to integrate with such workflows, enabling them to leverage common, well-tested implementations of metrics and other experimental support code while continuing to use their existing data flows for the recommendation process.
+
+\section{Conclusion}
+
+We have learned many lessons developing, maintaining, and researching with the LensKit software.
+Based on these lessons, we came to the conclusion that, in its current form, it is not meeting our needs or the needs of the recommender systems community well, and that resources would be better spent on tools that improve research being done with the widely-used Python packages that drive much of modern data science.
+
+Where LensKit focused on providing building blocks for recommender \emph{algorithms}, LKPY provides building blocks for recommender \emph{experiments}.
+Built on the PyData stack and oragnized around clear, explicit data processing pipelines with a minimum of custom concepts, LKPY provides a solid foundation for new experimentation and concepts at all stages of the offline recommender system evaluation lifecycle.
+We expect it to meet our own research needs in offline evaluation and simulation of recommender systems much better than the current LensKit code going forward, and hope that others in the research community find it useful as well.
+We welcome contributions on GitHub, and invite feedback from the community to guide future development.
