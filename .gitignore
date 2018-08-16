@@ -1,0 +1,11 @@
+*.pdf
+*.aux
+*.bbl
+*.blg
+*.fdb*
+*.log
+*.fls
+*.out
+default.pyg*
+default-pyg*
+*.pygtex
