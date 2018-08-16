@@ -42,6 +42,9 @@ This work, particularly in MovieLens, has enabled new user-centered research on 
 
 \section{Reflections on LensKit}
 
+Our direct experience using LensKit in this range of applications, and what we hear from other users and prospective users, has given us a somewhat different perspective on the software than we had when we developed the early versions of LensKit.
+We think some of our decisions and goals hit the mark and we were successful in achieving them; some other design decisions have not held up well in the light of experience.
+
 \subsection{What We Got Right}
 
 There are several things that we think we did well in the original LensKit software; some of these we carry forward into LKPY, while others were good ideas in LensKit's contexts but are not as important today.
@@ -62,6 +65,8 @@ In the item-item collaborative filter, for example, users can change the similar
 This configurability has been useful for exploring a range of configuration options for algorithms, at the expense of larger hyperparameter search spaces.
 
 \subsection{What Doesn't Work}
+
+Other aspects of LensKit's design and development do not seem to have met our needs or those of the community as well.
 
 \subsubsection{Opinionated Evaluation}
 While LensKit's algorithms were highly configurable, its offline evaluation tools are much more opinionated.
@@ -224,7 +229,8 @@ We use Cython \citep{Behnel2011-uz} for native-code acceleration, as it integrat
 We regularly test LKPY with recent Python versions on Windows, Linux, and macOS.
 Our ongoing criteria are to support the three major operating systems, and the version of Python 3 available in the most most recent release of major Linux distributions (Ubuntu LTS, RHEL/CentOS with EPEL, and Debian).
 We focus primarily on Anaconda-based Python installations, but also test the code with vanilla Python on all supported platforms.
-We provide binaries both via Anaconda and the Python Package Index for supported Python versions and operating systems.\footnote{We are not yet able to provide PyPI binaries for Python 3.7 due to missing prepackaged binaries of one of our dependencies.}
+We provide binaries via Anaconda Cloud for supported Python versions and operating systems\footnote{\url{https://anaconda.org/lenskit/lenskit}}, along with source distributions on the Python Package Index\footnote{\url{https://pypi.org/project/lenskit/}}.
+We are evaluating providing precompiled binaries through the Python Package Index as well.
 
 \subsection{Future Directions}
 
