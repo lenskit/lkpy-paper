@@ -2160,8 +2160,7 @@ Computing Machinery]
      \ifx\@acmEditors\@empty\textit{.}\else
        \andify\@acmEditors\textit{, }\@acmEditors~\@editorsAbbrev.%
      \fi\
-     ACM, New York, NY, USA%
-       \@article@string\unskip, \ref{TotPages}~\@pages@word.
+     \@article@string\unskip, \ref{TotPages}~\@pages@word.
   \fi
   \ifx\@acmDOI\@empty\else\@formatdoi{\@acmDOI}\fi
 \par\egroup}

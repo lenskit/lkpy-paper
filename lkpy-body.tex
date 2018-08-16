@@ -163,7 +163,7 @@ LKPY provides implementations of nonpersonalized, $k$-NN, and biased matrix fact
 We expect to expand the set of algorithms provided, but being a source of algorithms is not LKPY's primary objective.
 These algorithms are provided in part to give LensKit users a migration path to LKPY that keeps the algorithms as consistent as possible; LKPY's algorithm implementations are based on LensKit's and should generally be the same.
 They are less configurable, however, selecting configuration options such as item-item similarity functions that we have found to work well across a range of data sets.
-We use Cython to accelerate inner algorithm computations when built-in Scipy/Numpy/Pandas operations are inadequate.
+We use Cython to accelerate inner algorithm computations when NumPy, SciPy, or Pandas operations are inadequate.
 
 \item[Batch Utilities]
 To ease writing evaluation scripts, LKPY provides utility functions for computing predictions or recommendations for many users in batch.
